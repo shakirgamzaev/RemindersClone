@@ -16,11 +16,12 @@ struct ContentView: View {
             ZStack(alignment: .bottom) {
                 ScrollView {
                     VStack {
-                        Rectangle()
-                            .frame(height: 30)
+                        Text("My Lists")
                     }
+                    .frame(maxWidth: .infinity)
                 }
                 .scrollIndicators(.hidden)
+                
                 HStack {
                     Button {
                         isPresented.toggle()
