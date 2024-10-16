@@ -8,9 +8,9 @@
 import Foundation
 import CoreData
 
-
+@MainActor
 class CoreDataStack {
-    @MainActor let shared = CoreDataStack()
+    static let shared = CoreDataStack()
     let persistentContainer: NSPersistentContainer
     var viewContext: NSManagedObjectContext {
         persistentContainer.viewContext
@@ -18,6 +18,7 @@ class CoreDataStack {
     
     init(inMemory: Bool = false) {
         self.persistentContainer = NSPersistentContainer(name: "RemindersModel")
+        ValueTransformer.setValueTransformer(UIColorTransformer(), forName: NSValueTransformerName("UIColorTransformer"))
         if inMemory {
             persistentContainer.persistentStoreDescriptions.first!.url = URL(filePath: "/dev/null")
         }
@@ -28,6 +29,4 @@ class CoreDataStack {
         }
         
     }
-    
-    
 }

@@ -11,6 +11,8 @@ struct AddNewListView: View {
     @State private var selectedColor: Color = .green
     @State private var listName = ""
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.managedObjectContext) private var viewContext
+    
     var isEmptyName: Bool {
         return listName.isEmpty
     }
@@ -42,6 +44,13 @@ struct AddNewListView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             //dismiss and save the new list into persisten store with core data
+                            do {
+                                try saveNewListToDataBase()
+                            }
+                            catch {
+                                print(error.localizedDescription)
+                            }
+                            
                         } label: {
                             Text("Done")
                         }
@@ -59,6 +68,12 @@ struct AddNewListView: View {
                 }
             }
         }
+    }
+}
+
+extension AddNewListView {
+    func saveNewListToDataBase() throws {
+        try ListService.saveList(listName, UIColor(selectedColor), viewContext)
     }
 }
 

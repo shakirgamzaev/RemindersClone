@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isPresented = false
+    @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
         NavigationStack {
@@ -26,7 +27,7 @@ struct ContentView: View {
                     } label: {
                         Text("Add List")
                     }
-
+                    
                 }
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .trailing)
@@ -41,4 +42,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environment(\.managedObjectContext, CoreDataStack(inMemory: true).viewContext)
 }
