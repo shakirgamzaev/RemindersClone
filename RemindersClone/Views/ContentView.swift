@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ContentView: View {
+    @FetchRequest(sortDescriptors: [])  var lists: FetchedResults<MyListMO>
     @State private var isPresented = false
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -15,11 +17,15 @@ struct ContentView: View {
         NavigationStack {
             ZStack(alignment: .bottom) {
                 ScrollView {
-                    VStack {
-                        Text("My Lists")
-                    }
-                    .frame(maxWidth: .infinity)
+                    Text("My Lists")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .safeAreaPadding(.bottom, 15)
+                        .font(.title)
+                        .bold()
+                    MyListsView(myLists: lists)
                 }
+                .safeAreaPadding(.horizontal, 15)
+                .safeAreaPadding(.top, 20)
                 .scrollIndicators(.hidden)
                 
                 HStack {

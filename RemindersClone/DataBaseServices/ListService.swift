@@ -12,7 +12,6 @@ import UIKit
 @MainActor
 class ListService {
     
-    
     static func saveContext(_ managedContext: NSManagedObjectContext) throws {
         try managedContext.save()
     }
@@ -23,5 +22,19 @@ class ListService {
         newList.color = color
         newList.name = name
         try saveContext(managedContext)
+    }
+    
+    static func saveReminderToList(
+        _ list: MyListMO,
+        _ managedContext: NSManagedObjectContext,
+        title: String) {
+            let newReminder = ReminderMO(context: managedContext)
+            newReminder.myList = list
+            newReminder.title = title
+            do {
+                try saveContext(managedContext)
+            } catch  {
+                print(error.localizedDescription)
+            }
     }
 }

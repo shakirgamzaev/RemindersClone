@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import UIKit
+import SwiftUI
 
 extension MyListMO {
 
@@ -23,4 +24,11 @@ extension MyListMO {
 
 extension MyListMO : Identifiable {
 
+}
+
+extension MyListMO {
+    override public func awakeFromInsert() {
+        self.color = UIColor(Color.red)
+        self.name = "previewList"
+    }
 }

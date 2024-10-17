@@ -3,5 +3,14 @@
     <entity name="MyList" representedClassName=".MyListMO" syncable="YES">
         <attribute name="color" attributeType="Transformable" valueTransformerName="UIColorTransformer" customClassName=".UIColor"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
+        <relationship name="reminders" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Reminder" inverseName="myList" inverseEntity="Reminder"/>
+    </entity>
+    <entity name="Reminder" representedClassName=".ReminderMO" syncable="YES">
+        <attribute name="isCompleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="notes" attributeType="String" defaultValueString=""/>
+        <attribute name="reminderDate" optional="YES" attributeType="Date" defaultDateTimeInterval="750781140" usesScalarValueType="NO"/>
+        <attribute name="reminderTime" optional="YES" attributeType="Date" defaultDateTimeInterval="750781140" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+        <relationship name="myList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MyList" inverseName="reminders" inverseEntity="MyList"/>
     </entity>
 </model>

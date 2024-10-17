@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-@MainActor
+
 class UIColorTransformer : ValueTransformer {
     override class func transformedValueClass() -> AnyClass {
         return UIColor.self

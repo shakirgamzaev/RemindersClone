@@ -46,9 +46,11 @@ struct AddNewListView: View {
                             //dismiss and save the new list into persisten store with core data
                             do {
                                 try saveNewListToDataBase()
+                                dismiss()
                             }
                             catch {
                                 print(error.localizedDescription)
+                                dismiss()
                             }
                             
                         } label: {
