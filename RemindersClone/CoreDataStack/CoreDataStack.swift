@@ -47,7 +47,9 @@ extension CoreDataStack {
         let newList2 = MyListMO(context: viewContext)
         newList2.name = "previewList2"
         newList2.color = UIColor(.green)
-        
+        let newReminder = ReminderMO(context: viewContext)
+        newReminder.title = "previewReminder"
+        newReminder.myList = newList
         do {
             try viewContext.save()
         } catch  {

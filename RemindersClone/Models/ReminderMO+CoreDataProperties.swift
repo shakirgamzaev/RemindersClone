@@ -13,7 +13,9 @@ import CoreData
 extension ReminderMO {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<ReminderMO> {
-        return NSFetchRequest<ReminderMO>(entityName: "Reminder")
+        let fetchRequest = NSFetchRequest<ReminderMO>(entityName: "Reminder")
+        fetchRequest.sortDescriptors = []
+        return fetchRequest
     }
 
     @NSManaged public var title: String?
@@ -31,11 +33,19 @@ extension ReminderMO : Identifiable {
 
 extension ReminderMO {
     override public func awakeFromInsert() {
-        title = "title"
+        title = "reminderPreview"
         notes = "notes"
         isCompleted = false
         reminderDate = Calendar.current.date(byAdding: .month, value: 1, to: Calendar.current.startOfDay(for: Date.now))
         reminderTime = Date.now
         
     }
+    
+    static func fetchRequestRemindersByList(list: MyListMO) -> NSFetchRequest<ReminderMO> {
+        let fetchRequest: NSFetchRequest<ReminderMO> = NSFetchRequest(entityName: "Reminder")
+        fetchRequest.sortDescriptors = []
+        fetchRequest.predicate = NSPredicate(format: "myList == %@ AND isCompleted == false", list)
+        return fetchRequest
+    }
+    
 }

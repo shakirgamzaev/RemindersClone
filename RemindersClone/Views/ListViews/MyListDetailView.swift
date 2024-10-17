@@ -14,13 +14,21 @@ struct MyListDetailView: View {
     @State private var isAlertPresented = false
     @State private var reminderName = ""
     @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(sortDescriptors: []) private var reminders: FetchedResults<ReminderMO>
+    
+    init(myList: MyListMO) {
+        self.myList = myList
+        _reminders = FetchRequest(fetchRequest: ReminderMO.fetchRequestRemindersByList(list: myList))
+    }
     
     var body: some View {
         List {
             VStack {
                 // List Of reminders
+                ListOfRemindersView(reminders: reminders)
+                
             }
-            .navigationTitle(Text(myList.name ?? "list").foregroundStyle(.orange))
+            .navigationTitle(Text(myList.name ?? "list"))
             .navigationBarTitleDisplayMode(.large)
             .listRowSeparator(.hidden)
             .toolbar {

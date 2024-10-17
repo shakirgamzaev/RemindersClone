@@ -2,14 +2,14 @@
 //  MyListMO+CoreDataProperties.swift
 //  RemindersClone
 //
-//  Created by shakir Gamzaev on 15/10/24.
+//  Created by shakir Gamzaev on 17/10/24.
 //
 //
 
 import Foundation
 import CoreData
-import UIKit
 import SwiftUI
+
 
 extension MyListMO {
 
@@ -19,6 +19,24 @@ extension MyListMO {
 
     @NSManaged public var color: UIColor?
     @NSManaged public var name: String?
+    @NSManaged public var reminders: NSSet?
+
+}
+
+// MARK: Generated accessors for reminders
+extension MyListMO {
+
+    @objc(addRemindersObject:)
+    @NSManaged public func addToReminders(_ value: ReminderMO)
+
+    @objc(removeRemindersObject:)
+    @NSManaged public func removeFromReminders(_ value: ReminderMO)
+
+    @objc(addReminders:)
+    @NSManaged public func addToReminders(_ values: NSSet)
+
+    @objc(removeReminders:)
+    @NSManaged public func removeFromReminders(_ values: NSSet)
 
 }
 

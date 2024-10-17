@@ -2,7 +2,7 @@
 //  MyListMO+CoreDataClass.swift
 //  RemindersClone
 //
-//  Created by shakir Gamzaev on 15/10/24.
+//  Created by shakir Gamzaev on 17/10/24.
 //
 //
 
